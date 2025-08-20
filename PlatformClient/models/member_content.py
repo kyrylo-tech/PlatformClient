@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, Literal, Any, Dict
 from http.client import HTTPResponse
 
+from ..query_builder import QueryBuilder
 from ..types import SafeUUID
 from ._default import BaseMethods, BaseClass
 
@@ -11,13 +12,13 @@ if TYPE_CHECKING:
 ContentKind = Literal["course", "lesson", "test", "webcontent", "survey"]
 
 _KIND_TO_TOKEN = {
-    "course": "Course",
-    "lesson": "Lesson",
-    "test": "Test",
-    "webcontent": "WebContent",
-    "survey": "Survey",
-    "game": "Game",
-    "event": "Event",
+    "Course": "Course",
+    "Lesson": "Lesson",
+    "Test": "Test",
+    "WebContent": "WebContent",
+    "Survey": "Survey",
+    "Game": "Game",
+    "Event": "Event",
 }
 
 
@@ -45,39 +46,53 @@ class MemberContentMethods(BaseMethods):
         self,
         branch_id: SafeUUID | str,
         kind: ContentKind,
-        data: dict | None = None,
+        filter_query: None | dict | QueryBuilder = None
     ) -> HTTPResponse:
         """
         POST /CompanyBranch/MemberContent/Get{Kind}AccessGrants
         Body: {"companyBranchId": ..., "data": {...}}
         """
         token = _kind_token(kind)
+
+        new_filter_query = filter_query or {}
+        if isinstance(new_filter_query, QueryBuilder):
+            new_filter_query = new_filter_query.build()
+
         return await self._post(
             f"Get{token}AccessGrants",
-            {"companyBranchId": str(branch_id), "data": data or {}},
+            {"companyBranchId": str(branch_id), "data": new_filter_query},
         )
 
     async def GetAccessGrantHistory(
         self,
         branch_id: SafeUUID | str,
         kind: ContentKind,
-        data: dict | None = None,
+        filter_query: None | dict | QueryBuilder = None
     ) -> HTTPResponse:
         """
         POST /CompanyBranch/MemberContent/Get{Kind}AccessGrantHistory
         Body: {"companyBranchId": ..., "data": {...}}
         """
         token = _kind_token(kind)
+
+        new_filter_query = filter_query or {}
+        if isinstance(new_filter_query, QueryBuilder):
+            new_filter_query = new_filter_query.build()
+
         return await self._post(
             f"Get{token}AccessGrantHistory",
-            {"companyBranchId": str(branch_id), "data": data or {}},
+            {"companyBranchId": str(branch_id), "data": new_filter_query},
         )
 
     async def AccessGrant(
         self,
         branch_id: SafeUUID | str,
         kind: ContentKind,
-        data: dict,
+        user_id: SafeUUID | str,
+        entity_id: SafeUUID | str,
+        count: int = 0,
+        description: str = "string",
+        expire_time: str = None,
     ) -> HTTPResponse:
         """
         POST /CompanyBranch/MemberContent/{Kind}AccessGrant
@@ -85,9 +100,22 @@ class MemberContentMethods(BaseMethods):
         Приклад data: {"memberId": "...", "itemId": "...", "expiresAt": "..."}.
         """
         token = _kind_token(kind)
+
+        if expire_time is None:
+            expire_time = "2025-08-20T13:05:44.664Z"
+
         return await self._post(
             f"{token}AccessGrant",
-            {"companyBranchId": str(branch_id), "data": data},
+            {
+                "companyBranchId": str(branch_id),
+                "data": {
+                    "description": "string",
+                    "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "entityId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "expireTime": "2025-08-20T13:05:44.664Z",
+                    "count": 0
+                }
+            },
         )
 
     async def AccessRecall(
@@ -114,7 +142,7 @@ class BoundMemberContent:
         self.methods = methods
         self.branch_id = branch_id
 
-    async def GetAccessGrants(self, kind: ContentKind, data: dict | None = None):
+    async def GetAccessGrants(self, kind: ContentKind, filter_query: dict | None = None):
         return await self.methods.GetAccessGrants(self.branch_id, kind, data)
 
     async def GetAccessGrantHistory(self, kind: ContentKind, data: dict | None = None):
