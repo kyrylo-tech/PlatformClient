@@ -1,0 +1,9 @@
+[project]
+name = "PlatformClient"
+version = "0.1.0"
+description = "Wrapper for Leeearn API"
+authors = [{ name = "Kyrylo", email = "you@example.com" }]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
