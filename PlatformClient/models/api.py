@@ -40,7 +40,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/GetDetails",
-            { "companyBranchId": str(branch_id), "apiId": str(api_id) }
+            { "CompanyBranchId": str(branch_id), "ApiId": str(api_id) }
         )
 
     async def Create(self, branch_id: SafeUUID | str, name: str, access: list[UserAccess]) -> HTTPResponse:
@@ -57,7 +57,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/Create",
-            {"companyBranchId": str(branch_id), "data": {"name": name, "access": access} }
+            {"CompanyBranchId": str(branch_id), "Data": {"Name": name, "Access": access} }
         )
 
     async def Edit(self, branch_id: SafeUUID | str, api_id: SafeUUID | str, new_name: str = None, new_access: list[UserAccess] = None) -> HTTPResponse:
@@ -74,7 +74,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/Edit",
-            { "companyBranchId": str(branch_id), "data": { "name": new_name, "access": new_access }, "apiId": str(api_id) }
+            { "CompanyBranchId": str(branch_id), "Data": { "Name": new_name, "Access": new_access }, "ApiId": str(api_id) }
         )
 
     async def ResetToken(self, branch_id: SafeUUID | str, api_id: SafeUUID | str) -> HTTPResponse:
@@ -89,7 +89,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/ResetToken",
-            { "companyBranchId": str(branch_id), "apiId": str(api_id) }
+            { "CompanyBranchId": str(branch_id), "ApiId": str(api_id) }
         )
 
     async def Remove(self, branch_id: SafeUUID | str, api_id: SafeUUID | str):
@@ -104,7 +104,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/Remove",
-            { "companyBranchId": str(branch_id), "apiId": str(api_id) }
+            { "CompanyBranchId": str(branch_id), "ApiId": str(api_id) }
         )
 
     async def GetVariables(self, branch_id: SafeUUID | str, api_id: SafeUUID | str):
@@ -116,7 +116,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/GetVariables",
-            { "companyBranchId": str(branch_id), "apiId": str(api_id) }
+            { "CompanyBranchId": str(branch_id), "ApiId": str(api_id) }
         )
 
     async def SetVariable(self, branch_id: SafeUUID | str, api_id: SafeUUID | str, name: str, value: str):
@@ -130,7 +130,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/SetVariable",
-            { "companyBranchId": str(branch_id), "apiId": str(api_id), "data": { "name": name, "value": value } }
+            { "CompanyBranchId": str(branch_id), "ApiId": str(api_id), "Data": { "Name": name, "Value": value } }
         )
 
     async def SetVariables(self, branch_id: SafeUUID | str, api_id: SafeUUID | str, variables: list[dict[str, str]]):
@@ -143,7 +143,7 @@ class APIMethods(BaseMethods):
         """
         return await self.client.send_request(
             f"{self.path}/SetVariables",
-            {"companyBranchId": str(branch_id), "apiId": str(api_id), "data": variables }
+            {"CompanyBranchId": str(branch_id), "ApiId": str(api_id), "Data": variables }
         )
 
 

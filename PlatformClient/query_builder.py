@@ -59,26 +59,26 @@ class QueryBuilder:
         value_block=None
     ):
         self.filters.append({
-            "propertyPath": property_path,
-            "compareType": compare_type,
-            "invertCompare": invert,
-            "value": value,
-            "valueNull": value_null,
-            "valueBlock": value_block
+            "PropertyPath": property_path,
+            "CompareType": compare_type,
+            "InvertCompare": invert,
+            "Value": value,
+            "ValueNull": value_null,
+            "ValueBlock": value_block
         })
         return self
 
     def order(self, property_path: str, asc: bool = True):
         self.orders.append({
-            "propertyPath": property_path,
-            "asc": asc
+            "PropertyPath": property_path,
+            "Asc": asc
         })
         return self
 
     def build(self):
         return {
-            "offset": self.offset,
-            "count": self.count,
-            "filterQuery": [{"properties": self.filters}] if self.filters else [],
-            "orderQuery": [{"properties": self.orders}] if self.orders else [],
+            "Offset": self.offset,
+            "Count": self.count,
+            "FilterQuery": [{"Properties": self.filters}] if self.filters else [],
+            "OrderQuery": [{"Properties": self.orders}] if self.orders else [],
         }

@@ -35,7 +35,7 @@ class MemberContentMethods(BaseMethods):
     Адаптивний клієнт для /api/CompanyBranch/MemberContent/*
     Формує назву ендпоінта зі значення kind.
     """
-    path = "/CompanyBranch/MemberContent"
+    path = "/CompanyBranchMemberContent"
 
     # ---------- LOW-LEVEL ----------
     async def _post(self, endpoint: str, body: Dict[str, Any]) -> HTTPResponse:
@@ -142,11 +142,11 @@ class BoundMemberContent:
         self.methods = methods
         self.branch_id = branch_id
 
-    async def GetAccessGrants(self, kind: ContentKind, filter_query: dict | None = None):
-        return await self.methods.GetAccessGrants(self.branch_id, kind, data)
+    async def GetAccessGrants(self, kind: ContentKind, filter_query = None):
+        return await self.methods.GetAccessGrants(self.branch_id, kind, filter_query)
 
-    async def GetAccessGrantHistory(self, kind: ContentKind, data: dict | None = None):
-        return await self.methods.GetAccessGrantHistory(self.branch_id, kind, data)
+    async def GetAccessGrantHistory(self, kind: ContentKind, filter_query = None):
+        return await self.methods.GetAccessGrantHistory(self.branch_id, kind, filter_query)
 
     async def AccessGrant(self, kind: ContentKind, data: dict):
         return await self.methods.AccessGrant(self.branch_id, kind, data)

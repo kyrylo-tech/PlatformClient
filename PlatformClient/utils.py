@@ -22,7 +22,7 @@ def sync_request(client: "PlatformClient",
         conn = http.client.HTTPSConnection(client.host)
 
         if client.debug_logs:
-            print(f"[⌛] {client.host}{endpoint} : {body_data}")
+            print(f"[⌛] {client.host}{endpoint} : {headers} : {body_data}")
 
         conn.request("POST", endpoint, body=body_data, headers=headers)
         response = conn.getresponse()
