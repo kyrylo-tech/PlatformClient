@@ -1,9 +1,21 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
 [project]
 name = "PlatformClient"
+authors = [
+    { name = "Kyrylo Bitsay", email = "bitsay.kyrylo@proton.me" }
+]
 version = "0.1.0"
-description = "Wrapper for Leeearn API"
-authors = [{ name = "Kyrylo", email = "you@example.com" }]
+description = "Leeearn.ai API Wrapper Client"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
 
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+# опціонально: створюємо CLI команду `mycool`
+[project.scripts]
+mycool = "PlatformClient.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/PlatformClient"]

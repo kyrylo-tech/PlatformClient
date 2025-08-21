@@ -1,7 +1,7 @@
 import asyncio
 
-from PlatformClient import PlatformClient
-from PlatformClient.query_builder import QueryBuilder
+from src.PlatformClient import PlatformClient
+from src.PlatformClient.query_builder import QueryBuilder
 from tests.creds import Credentials as Creds
 
 client = PlatformClient(Creds.API_URL, Creds.API_TOKEN_ID, Creds.API_ACCESS_TOKEN)

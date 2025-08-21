@@ -28,6 +28,6 @@ class PlatformClient:
         return BranchClass(self, branch_id)
 
     async def send_request(self, endpoint: str, params: dict | str | None = None):
-        from PlatformClient.utils import sync_request
+        from src.PlatformClient.utils import sync_request
         path = f"{self.base_path}{endpoint}"
         return await asyncio.to_thread(sync_request, self, path, params)
