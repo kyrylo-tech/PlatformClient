@@ -1,0 +1,22 @@
+site_name: Platform Client
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - content.code.copy
+    - navigation.expand
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_toc_entry: true
+
+nav:
+  - Home: index.md
+
+docs_dir: docs

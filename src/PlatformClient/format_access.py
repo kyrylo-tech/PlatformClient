@@ -1,4 +1,4 @@
-from src.PlatformClient.types import UserAccessType
+from .types import UserAccessType
 
 t = ""
 

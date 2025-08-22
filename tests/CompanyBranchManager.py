@@ -11,7 +11,7 @@ async def main():
     branch = client.GetBranch("0938cb91-f780-401a-b18c-f88f34f3fa80")
 
     query = QueryBuilder().filter(
-        property_path="NormalizedPhoneNumber",
+        property_path="User.NormalizedPhoneNumber",
         value="+380677742431"
     )
 
