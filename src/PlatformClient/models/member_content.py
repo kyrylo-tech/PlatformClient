@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from ..client import PlatformClient
 
 
-ContentKind = Literal["course", "lesson", "test", "webcontent", "survey"]
+ContentKind = Literal["Course", "Lesson", "Test", "WebContent", "Survey", "Game", "Event"]
 
 _KIND_TO_TOKEN = {
     "Course": "Course",
