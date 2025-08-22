@@ -4,6 +4,7 @@ from http.client import HTTPResponse
 from ..query_builder import QueryBuilder
 from ..types import SafeUUID
 from ._default import BaseMethods, BaseClass
+from ..utils import PlatformResponse
 
 if TYPE_CHECKING:
     from ..client import PlatformClient
@@ -38,7 +39,7 @@ class MemberContentMethods(BaseMethods):
     path = "/CompanyBranchMemberContent"
 
     # ---------- LOW-LEVEL ----------
-    async def _post(self, endpoint: str, body: Dict[str, Any]) -> HTTPResponse:
+    async def _post(self, endpoint: str, body: Dict[str, Any]) -> PlatformResponse:
         return await self.client.send_request(f"{self.path}/{endpoint}", body)
 
     # ---------- GENERIC (4 методи) ----------
@@ -47,7 +48,7 @@ class MemberContentMethods(BaseMethods):
         branch_id: SafeUUID | str,
         kind: ContentKind,
         filter_query: None | dict | QueryBuilder = None
-    ) -> HTTPResponse:
+    ) -> PlatformResponse:
         """
         POST /CompanyBranch/MemberContent/Get{Kind}AccessGrants
         Body: {"companyBranchId": ..., "data": {...}}

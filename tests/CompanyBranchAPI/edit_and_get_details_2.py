@@ -1,7 +1,7 @@
 import asyncio
 
+from PlatformClient.types import UserAccess
 from src.PlatformClient import PlatformClient
-from src.PlatformClient import UserAccess
 from tests.creds import Credentials as Creds
 
 client = PlatformClient(Creds.API_URL, Creds.API_TOKEN_ID, Creds.API_ACCESS_TOKEN)
@@ -22,6 +22,6 @@ async def main():
         api_id=test_api_id
     )
 
-    print(api_details.status, api_details.read())
+    print(api_details.status, api_details.json())
 
 asyncio.run(main())

@@ -20,6 +20,6 @@ async def main():
 
     content = await branch.MemberContent.GetAccessGrants("Course", content_query)
 
-    print(content.status, content.read())
+    print(content.status, content.json())
 
 asyncio.run(main())

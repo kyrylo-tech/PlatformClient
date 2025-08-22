@@ -14,11 +14,11 @@ async def main():
 
     # change all variables
     changed = await api.SetVariables([{"name": "test333", "value": "433332"}])
-    print("CHANGE ALL", changed.status, changed.read())
+    print("CHANGE ALL", changed.status, changed.json())
 
     # get all variables
     all_variables = await api.GetVariables()
-    print(all_variables.read())
+    print(all_variables.json())
 
 
 

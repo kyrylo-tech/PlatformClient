@@ -19,6 +19,6 @@ async def main():
         filter_query=query
     )
 
-    print(api_list.status, api_list.read())
+    print(api_list.status, api_list.json())
 
 asyncio.run(main())

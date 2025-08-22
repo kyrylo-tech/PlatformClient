@@ -12,6 +12,6 @@ async def main():
 
     new_api = await branch.API.Create("test new", [UserAccess.CreateTests])
 
-    print(new_api.status, new_api.read())
+    print(new_api.status, new_api.json())
 
 asyncio.run(main())

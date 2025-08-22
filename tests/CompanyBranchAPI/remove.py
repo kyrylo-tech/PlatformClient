@@ -11,6 +11,6 @@ async def main():
 
     new_api = await branch.API.Remove("01987520-df40-7f9d-bf97-dd5e7788216f")
 
-    print(new_api.status, new_api.read())
+    print(new_api.status, new_api.json())
 
 asyncio.run(main())

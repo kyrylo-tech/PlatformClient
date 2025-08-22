@@ -1,9 +1,11 @@
 import asyncio
+from http.client import HTTPResponse
 from urllib.parse import urlparse
 
 from .models.branch import BranchMethods, BranchClass
 from .models.company import CompanyMethods
 from .types import SafeUUID
+from .utils import PlatformResponse
 
 
 class PlatformClient:
@@ -27,7 +29,7 @@ class PlatformClient:
     def GetBranch(self, branch_id: SafeUUID | str):
         return BranchClass(self, branch_id)
 
-    async def send_request(self, endpoint: str, params: dict | str | None = None):
+    async def send_request(self, endpoint: str, params: dict | str | None = None) -> PlatformResponse:
         from src.PlatformClient.utils import sync_request
         path = f"{self.base_path}{endpoint}"
         return await asyncio.to_thread(sync_request, self, path, params)

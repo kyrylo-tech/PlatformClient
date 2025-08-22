@@ -11,6 +11,6 @@ async def main():
     await api.Edit(name="тест тест")
     api_details = await api.GetDetails()
 
-    print(api_details.status, api_details.read())
+    print(api_details.status, api_details.json())
 
 asyncio.run(main())

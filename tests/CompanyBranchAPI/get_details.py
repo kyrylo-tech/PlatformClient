@@ -9,6 +9,6 @@ async def main():
     api = client.GetBranch(Creds.BRANCH_ID).GetAPI(Creds.API_TOKEN_ID)
     api_details = await api.GetDetails()
 
-    print(api_details.status, api_details.read())
+    print(api_details.status, api_details.json())
 
 asyncio.run(main())
