@@ -10,17 +10,13 @@ client.debug_logs = True
 async def main():
     branch = client.GetBranch("0938cb91-f780-401a-b18c-f88f34f3fa80")
 
-    leads_query = QueryBuilder().filter(
-        property_path="User.NormalizedPhoneNumber",
-        value="+380677742431"
-    )
-    leads = await branch.Leads.GetList(leads_query)
+    # query = QueryBuilder().filter(
+    #     property_path="User.NormalizedPhoneNumber",
+    #     value="+380677742431"
+    # )
 
-    print(leads.status, leads.json())
+    content = await branch.Teachers.GetList(query)
 
-    lead_id = "01989eae-e516-74cb-8d7f-5320cc274de3"
-    groups = await branch.Leads.GetGroups(lead_id)
-
-    print(groups.status, groups.json())
+    print(content.status, content.json())
 
 asyncio.run(main())

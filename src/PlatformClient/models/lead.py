@@ -46,6 +46,39 @@ class LeadMethods(BaseMethods):
             { "CompanyBranchId": str(branch_id), "leadId": str(lead_id) }
         )
 
+    async def GetLeadGroups(
+            self,
+            branch_id: SafeUUID | str,
+            lead_id: SafeUUID | str,
+            filter_query: None | dict | QueryBuilder = None
+    ) -> HTTPResponse:
+        """
+        Endpoint: /CompanyBranchLead/GetLeadGroups
+
+        Body:
+        ``{
+            "companyBranchId": branch_id,
+            "leadId": lead_id,
+            "data": filter_query
+        }``
+
+        :param branch_id: Branch ID
+        :param lead_id: Lead ID
+        :param filter_query: Optional filter
+        """
+        new_filter_query = filter_query or {}
+        if isinstance(new_filter_query, QueryBuilder):
+            new_filter_query = new_filter_query.build()
+
+        return await self.client.send_request(
+            f"{self.path}/GetLeadGroups",
+            {
+                "companyBranchId": str(branch_id),
+                "leadId": str(lead_id),
+                "data": new_filter_query
+            }
+        )
+
 
 
 class BoundLeadMethods:
@@ -58,6 +91,13 @@ class BoundLeadMethods:
 
     async def GetDetails(self, lead_id: SafeUUID | str):
         return await self.methods.GetDetails(self.branch_id, lead_id)
+
+    async def GetLeadGroups(self, lead_id: SafeUUID | str, filter_query=None):
+        return await self.methods.GetLeadGroups(
+            self.branch_id,
+            lead_id,
+            filter_query=filter_query
+        )
 
 
 class LeadClass(BaseClass[LeadMethods]):
